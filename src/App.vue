@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 const getPost = async () => {
   fetch("https://randomuser.me/api/?results=100").then((res) => res.json());
 };
