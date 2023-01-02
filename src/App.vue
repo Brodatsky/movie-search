@@ -1,54 +1,38 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from "vue-router";
+const getPost = async () => {
+  fetch("https://randomuser.me/api/?results=100").then((res) => res.json());
+};
+
+console.log(getPost());
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
   <div class="wrapper">
-    <RouterView />
+    <div class="form">123</div>
+  </div>
+
+  <div class="wrapper">
+    <div class="card">123</div>
+    <div class="card">123</div>
   </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+.wrapper {
+  display: flex;
+  justify-content: center;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
+.form {
   width: 100%;
+  min-height: 200px;
   font-size: 12px;
   text-align: center;
-  margin-top: 2rem;
+  background: rgb(206, 206, 206);
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
+.card {
+  min-width: 200px;
+  border: 1px solid var--color-border;
 }
 </style>
