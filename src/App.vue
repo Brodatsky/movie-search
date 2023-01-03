@@ -7,7 +7,7 @@ const todoData = ref(null);
 async function fetchData() {
   todoData.value = null;
   const res = await fetch(
-    `https://jsonplaceholder.typicode.com/todos/${todoId.value}`
+    `http://www.omdbapi.com/?t=${todoId.value}&apikey=77b8e5a8`
   );
   todoData.value = await res.json();
 }
