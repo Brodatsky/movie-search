@@ -1,9 +1,20 @@
 <script setup>
-const getPost = async () => {
-  fetch("https://randomuser.me/api/?results=100").then((res) => res.json());
-};
+import { ref, watch } from "vue";
 
-console.log(getPost());
+const todoId = ref(1);
+const todoData = ref(null);
+
+async function fetchData() {
+  todoData.value = null;
+  const res = await fetch(
+    `https://jsonplaceholder.typicode.com/todos/${todoId.value}`
+  );
+  todoData.value = await res.json();
+}
+
+fetchData();
+
+watch(todoId, fetchData);
 </script>
 
 <template>
@@ -12,15 +23,23 @@ console.log(getPost());
   </div>
 
   <div class="wrapper">
-    <div class="card">123</div>
-    <div class="card">123</div>
+    <div class="card">
+      <p>Todo id: {{ todoId }}</p>
+      <button @click="todoId++">Fetch next todo</button>
+      <p v-if="!todoData">Loading...</p>
+      <pre v-else>{{ todoData }}</pre>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .wrapper {
+  margin: 0 auto;
+  width: 1024px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  background-color: antiquewhite;
 }
 
 .form {
@@ -33,6 +52,8 @@ console.log(getPost());
 
 .card {
   min-width: 200px;
-  border: 1px solid var--color-border;
+  min-height: 200px;
+  border: 1px solid black;
+  margin-right: 20px;
 }
 </style>
