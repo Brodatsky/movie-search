@@ -1,33 +1,33 @@
 <script setup>
-import { ref, watch } from "vue";
+import { ref, watchEffect } from "vue";
 
-const todoId = ref(1);
-const todoData = ref(null);
+const title = ref("");
+const year = ref("");
+const Data = ref(null);
 
-async function fetchData() {
-  todoData.value = null;
+watchEffect(async () => {
+  Data.value = null;
   const res = await fetch(
-    `http://www.omdbapi.com/?t=${todoId.value}&apikey=77b8e5a8`
+    `http://www.omdbapi.com/?t=${title.value}&y=${year.value}&apikey=77b8e5a8`
   );
-  todoData.value = await res.json();
-}
-
-fetchData();
-
-watch(todoId, fetchData);
+  Data.value = await res.json();
+});
 </script>
 
 <template>
   <div class="wrapper">
-    <div class="form">123</div>
+    <div class="form">
+      <p>Title: {{ title }}</p>
+      <input v-model="title" placeholder="Type here" />
+      <p>Year: {{ year }}</p>
+      <input v-model="year" placeholder="Type here" />
+    </div>
   </div>
 
   <div class="wrapper">
     <div class="card">
-      <p>Todo id: {{ todoId }}</p>
-      <button @click="todoId++">Fetch next todo</button>
-      <p v-if="!todoData">Loading...</p>
-      <pre v-else>{{ todoData }}</pre>
+      <p v-if="!Data">Loading...</p>
+      <pre v-else>{{ Data }}</pre>
     </div>
   </div>
 </template>
