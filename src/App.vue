@@ -1,16 +1,25 @@
 <script setup>
-import { ref, watchEffect } from "vue";
+import { ref, watchEffect, onMounted, onUpdated } from "vue";
 
 const title = ref("");
 const year = ref("");
+const page = ref("1");
 const Data = ref(null);
 
 watchEffect(async () => {
-  Data.value = null;
-  const res = await fetch(
-    `http://www.omdbapi.com/?t=${title.value}&y=${year.value}&apikey=77b8e5a8`
-  );
-  Data.value = await res.json();
+  try {
+    Data.value = null;
+    const res = await fetch(
+      `http://www.omdbapi.com/?s=${title.value}&y=${year.value}&page=${page.value}&apikey=77b8e5a8`
+    );
+    Data.value = await res.json();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+onUpdated(() => {
+  console.log(Data.value);
 });
 </script>
 
@@ -25,9 +34,12 @@ watchEffect(async () => {
   </div>
 
   <div class="wrapper">
-    <div class="card">
+    <div class="cards__list">
       <p v-if="!Data">Loading...</p>
-      <pre v-else>{{ Data }}</pre>
+      <div v-for="card in Data.Search" class="card">
+        {{ card }}
+      </div>
+      <!-- <pre v-else>{{ Data.Search }}</pre> -->
     </div>
   </div>
 </template>
@@ -37,23 +49,28 @@ watchEffect(async () => {
   margin: 0 auto;
   width: 1024px;
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   background-color: antiquewhite;
 }
 
 .form {
   width: 100%;
-  min-height: 200px;
+  min-height: 100px;
   font-size: 12px;
   text-align: center;
   background: rgb(206, 206, 206);
 }
 
 .card {
-  min-width: 200px;
-  min-height: 200px;
+  width: 190px;
   border: 1px solid black;
-  margin-right: 20px;
+  margin: 5px;
+  word-wrap: break-word;
+}
+.cards__list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 </style>
