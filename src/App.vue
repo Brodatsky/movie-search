@@ -26,20 +26,44 @@ onUpdated(() => {
 <template>
   <div class="wrapper">
     <div class="form">
-      <p>Title: {{ title }}</p>
-      <input v-model="title" placeholder="Type here" />
-      <p>Year: {{ year }}</p>
-      <input v-model="year" placeholder="Type here" />
+      <h1>Online Movie Search</h1>
+      <div class="form__top">
+        <input
+          v-model="title"
+          type="text"
+          placeholder="Search"
+          class="form__input form__search"
+          name="title"
+        />
+      </div>
+      <div class="form__bottom">
+        <label for="year" class="form__label">Year:</label>
+        <input
+          v-model="year"
+          type="text"
+          placeholder="Type here"
+          class="form__input"
+          name="year"
+        />
+        <label for="type" class="form__label">Type:</label>
+        <input
+          v-model="type"
+          type="text"
+          placeholder="Type here"
+          class="form__input"
+          name="type"
+        />
+      </div>
     </div>
   </div>
-
-  <div class="wrapper">
-    <div class="cards__list">
-      <p v-if="!Data">Loading...</p>
-      <div v-for="card in Data.Search" class="card">
-        {{ card }}
+  <div class="main">
+    <div class="wrapper">
+      <div class="cards__list">
+        <p v-if="!Data">Loading...</p>
+        <div v-for="card in Data.Search" class="card">
+          {{ card }}
+        </div>
       </div>
-      <!-- <pre v-else>{{ Data.Search }}</pre> -->
     </div>
   </div>
 </template>
@@ -48,19 +72,36 @@ onUpdated(() => {
 .wrapper {
   margin: 0 auto;
   width: 1024px;
-  display: flex;
-  justify-content: center;
-  background-color: antiquewhite;
+  background-color: rgb(231, 230, 228);
 }
 
 .form {
-  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
   min-height: 100px;
-  font-size: 12px;
-  text-align: center;
-  background: rgb(206, 206, 206);
+  font-size: 17px;
+  align-items: center;
+  width: 800px;
 }
+.form__top {
+  margin-bottom: 10px;
+}
+.form__bottom {
+  display: flex;
 
+  margin-bottom: 30px;
+}
+.form__search {
+  width: 450px;
+}
+.form__label {
+  margin-right: 10px;
+}
+.form__input {
+  height: 30px;
+  margin-right: 10px;
+}
 .card {
   width: 190px;
   border: 1px solid black;
