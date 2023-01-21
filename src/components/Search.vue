@@ -3,23 +3,17 @@ import { ref, onUpdated, watchEffect } from "vue";
 const title = ref("");
 const year = ref("");
 const page = ref("1");
-const Data = ref(null);
 
-watchEffect(async () => {
-  try {
-    Data.value = null;
-    const res = await fetch(
-      `http://www.omdbapi.com/?s=${title.value}&y=${year.value}&page=${page.value}&apikey=77b8e5a8`
-    );
-    Data.value = await res.json();
-  } catch (error) {
-    console.log(error);
-  }
-});
+const emit = defineEmits(["childData"]);
 
-onUpdated(() => {
-  console.log(Data.value);
-});
+async function submit() {
+  let obj = null;
+  const res = await fetch(
+    `http://www.omdbapi.com/?s=${title.value}&y=${year.value}&page=${page.value}&apikey=77b8e5a8`
+  );
+  obj = await res.json();
+  emit("childData", obj);
+}
 </script>
 <template>
   <div class="form">
@@ -52,6 +46,8 @@ onUpdated(() => {
       </div>
     </div>
   </div>
+
+  <button @click="submit">emit</button>
 </template>
 <style scoped>
 .form {

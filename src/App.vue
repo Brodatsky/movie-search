@@ -1,20 +1,25 @@
 <script setup>
 import Search from "./components/Search.vue";
+import { ref } from "vue";
+
+const Data = ref("No child msg yet");
 </script>
 
 <template>
   <div class="header">
     <h1 class="header__title">Online Movie Search</h1>
-    <Search />
+    <Search @childData="(res) => (Data = res)" />
   </div>
-  <!-- <div class="main">
+  <!-- <p>{{ Data }}</p> -->
+
+  <div class="main">
     <div class="cards__list">
       <p v-if="!Data">Loading...</p>
       <div v-for="card in Data.Search" class="card">
         {{ card }}
       </div>
     </div>
-  </div> -->
+  </div>
 </template>
 
 <style scoped>
