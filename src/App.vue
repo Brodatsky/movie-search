@@ -15,7 +15,7 @@ const isLoading = ref(false);
 async function getPage() {
   isLoading.value = true;
   let res: any = await fetch(
-    `http://www.omdbapi.com/?s=${form.value.search}&y=${form.value.year}&type=${form.value.type}&page=${form.value.page}&apikey=77b8e5a8`
+    `https://www.omdbapi.com/?s=${form.value.search}&y=${form.value.year}&type=${form.value.type}&page=${form.value.page}&apikey=77b8e5a8`
   );
   let obj = await res.json();
   data.value = obj.Search;
