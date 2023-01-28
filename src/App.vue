@@ -72,25 +72,31 @@ function prevPage() {
         </div>
       </div>
 
-      <button @click="getPage" class="form__btn">Search</button>
+      <button @click="getPage" class="btn">Search</button>
     </div>
   </div>
 
   <div class="main">
-    <p v-if="isLoading">Loading...</p>
     <CardList :data="data" />
 
-    <button @click="prevPage" class="form__btn">Prev</button>
-    <button @click="nextPage" class="form__btn">Next</button>
+    <div v-if="data" class="main__btns">
+      <button @click="prevPage" class="btn">Prev</button>
+      <p class="loader" v-if="isLoading">Loading...</p>
+      <button @click="nextPage" class="btn">Next</button>
+    </div>
   </div>
 </template>
 
 <style scoped>
+.loader {
+  position: absolute;
+}
 .header {
   padding: 10px;
   margin: 0 auto;
   max-width: 1024px;
-  background: rgb(207, 198, 187);
+  background: rgb(204, 204, 204);
+  margin-bottom: 20px;
 }
 .header__title {
   font-weight: bold;
@@ -138,9 +144,14 @@ function prevPage() {
   display: inline-block;
 }
 
-.form__btn {
-  background: rgb(102, 194, 129);
-  width: 50%;
+.main__btns {
+  display: flex;
+  justify-content: space-around;
+}
+.btn {
+  background: rgb(102, 109, 102);
+  color: rgb(255, 255, 255);
+  width: 30%;
   padding: 12px 20px;
   border: none;
   border-radius: 4px;

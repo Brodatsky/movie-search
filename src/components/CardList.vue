@@ -7,7 +7,8 @@ const props = defineProps({
 <template>
   <div class="cards__list">
     <div v-for="card in data" class="card">
-      <img :src="card.Poster" :alt="card.Title" />
+      <img :src="card.Poster" class="card__img" :alt="card.Title" />
+
       <h3 class="card__title">{{ card.Title }}</h3>
     </div>
   </div>
@@ -18,20 +19,27 @@ const props = defineProps({
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  gap: 1rem;
   justify-content: center;
+  margin-bottom: 20px;
 }
 .card {
+  padding: 5px;
   width: 190px;
   border: 1px solid black;
-  margin: 5px;
-  word-wrap: break-word;
+  background: rgb(212, 212, 212);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .card__title {
-  color: rgb(148, 47, 69);
+  color: rgb(0, 0, 0);
+  text-align: center;
+  word-wrap: break-word;
 }
-.card img {
+
+.card__img {
   width: 100%;
-  height: auto;
 }
 </style>
