@@ -2,9 +2,11 @@
   "name": "movie-search",
   "version": "0.0.0",
   "private": true,
+  "homepage": "https://Brodatsky.github.io/movie-search/",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
+    "deploy": "gh-pages -d dist",
     "preview": "vite preview",
     "build-only": "vite build"
   },
