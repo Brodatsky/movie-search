@@ -76,6 +76,8 @@ function prevPage() {
   </div>
 
   <div class="main">
+    <v-icon icon="mdi-home" />
+
     <CardList :data="data" />
 
     <div v-if="data" class="main__btns">
