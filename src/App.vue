@@ -71,8 +71,7 @@ function prevPage() {
           </select>
         </div>
       </div>
-
-      <button @click="getPage" class="btn">Search</button>
+      <v-btn @click="getPage"> Search </v-btn>
     </div>
   </div>
 

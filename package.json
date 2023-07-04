@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@ts-pro/vue-eternal-loading": "^1.3.0",
+    "vite-plugin-vuetify": "^1.0.2",
     "vue": "^3.2.45"
   },
   "devDependencies": {
