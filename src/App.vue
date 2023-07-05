@@ -18,8 +18,6 @@ const selectItems = ref([
 const data: any = ref("");
 const isLoading = ref(false);
 
-const IsSliderDisable = ref(true);
-
 async function getPage() {
   isLoading.value = true;
   console.log(form);
@@ -53,30 +51,20 @@ function prevPage() {
           <v-text-field
             variant="solo-filled"
             v-model="form.search"
-            placeholder="Search"
+            label="Search"
             id="form__title"
           ></v-text-field>
         </div>
         <div class="d-flex w-100">
           <div class="w-50">
-            <label for="form__year" class="form__label">Year</label>
-            <v-switch
-              v-model="IsSliderDisable"
-              :label="`Switch: ${IsSliderDisable.toString()}`"
-              hide-details
-              inset
-            ></v-switch>
-            <v-slider
-              :disabled="IsSliderDisable"
+            <v-text-field
+              variant="solo-filled"
               v-model="form.year"
-              thumb-label
-              :max="2023"
-              :min="1900"
-              :step="1"
-            ></v-slider>
+              label="Year"
+              type="number"
+            ></v-text-field>
           </div>
           <div class="w-50">
-            <label for="form__type" class="form__label">Type</label>
             <v-select
               v-model="form.type"
               label="Type"
@@ -85,20 +73,22 @@ function prevPage() {
             ></v-select>
           </div>
         </div>
-        <v-btn @click="getPage"> Search </v-btn>
+        <v-btn @click.prevent="getPage"> Search </v-btn>
       </div>
     </div>
     <v-main>
-      <v-icon icon="mdi-home" />
-      <CardList :data="data" />
-
-      <div v-if="data" class="main__btns">
-        <button @click="prevPage" class="btn">Prev</button>
-        <p class="loader" v-if="isLoading">Loading...</p>
-        <button @click="nextPage" class="btn">Next</button>
+      <div v-if="data" class="d-flex justify-space-around mb-5">
+        <v-btn @click="prevPage">Prev</v-btn>
+        <v-progress-circular
+          v-if="isLoading"
+          :indeterminate="isLoading"
+          size="24"
+          class="ms-2"
+        ></v-progress-circular>
+        <v-btn @click="nextPage">Next</v-btn>
       </div>
-    </v-main></v-app
-  >
+      <CardList :data="data" /> </v-main
+  ></v-app>
 </template>
 
 <style scoped>
