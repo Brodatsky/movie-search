@@ -6,10 +6,10 @@ const props = defineProps({
 
 <template>
   <div class="cards__list">
-    <div v-for="card in data" class="card">
-      <img :src="card.Poster" class="card__img" :alt="card.Title" />
-
-      <h3 class="card__title">{{ card.Title }}</h3>
+    <div v-for="card in data">
+      <v-sheet :title="card.Title" class="card">
+        <img :src="card.Poster" class="card__img" :alt="card.Title"
+      /></v-sheet>
     </div>
   </div>
 </template>
@@ -27,7 +27,7 @@ const props = defineProps({
   padding: 5px;
   width: 190px;
   border: 1px solid black;
-  background: rgb(212, 212, 212);
+  background: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
   align-items: center;
