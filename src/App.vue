@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import CardList from "./components/CardList.vue";
 
 const form = ref({
@@ -20,8 +20,6 @@ const isLoading = ref(false);
 
 async function getPage() {
   isLoading.value = true;
-  console.log(form);
-
   let res: any = await fetch(
     `https://www.omdbapi.com/?s=${form.value.search}&y=${form.value.year}&type=${form.value.type}&page=${form.value.page}&apikey=77b8e5a8`
   );
@@ -31,15 +29,7 @@ async function getPage() {
   isLoading.value = false;
 }
 
-function nextPage() {
-  form.value.page++;
-  getPage();
-}
-
-function prevPage() {
-  form.value.page < 2 ? form.value.page : form.value.page--;
-  getPage();
-}
+watch(() => form.value.page, getPage);
 </script>
 
 <template>
@@ -74,18 +64,21 @@ function prevPage() {
           </div>
         </div>
         <v-btn block @click.prevent="getPage"> Search </v-btn>
-      </div>
-    </div>
-    <v-main>
-      <div v-if="data" class="d-flex justify-space-around mb-5">
-        <v-btn @click="prevPage">Prev</v-btn>
         <v-progress-circular
           v-if="isLoading"
           :indeterminate="isLoading"
           size="24"
           class="ms-2"
         ></v-progress-circular>
-        <v-btn @click="nextPage">Next</v-btn>
+      </div>
+    </div>
+    <v-main>
+      <div v-if="data" class="d-flex justify-space-around mb-5">
+        <v-pagination
+          v-model="form.page"
+          :length="6"
+          rounded="circle"
+        ></v-pagination>
       </div>
 
       <CardList :data="data" />

@@ -6,8 +6,16 @@ const props = defineProps({
 
 <template>
   <v-container>
-    <v-row no-gutters>
-      <v-col v-for="card in data" :key="card" cols="12" md="2">
+    <v-row>
+      <v-col
+        v-for="card in data"
+        :key="card"
+        cols="12"
+        xs="12"
+        sm="6"
+        md="4"
+        lg="3"
+      >
         <v-card :title="card.Title">
           <img :src="card.Poster" class="card__img" :alt="card.Title"
         /></v-card>
