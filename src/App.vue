@@ -34,8 +34,8 @@ watch(() => form.value.page, getPage);
 
 <template>
   <v-app>
-    <div class="header">
-      <h1 class="header__title">Online Movie Search</h1>
+    <div class="header mb-5 pb-3">
+      <h1 class="header__title my-3">Online Movie Search</h1>
       <div class="form">
         <v-text-field
           variant="solo-filled"
@@ -63,20 +63,24 @@ watch(() => form.value.page, getPage);
             ></v-select>
           </div>
         </div>
-        <v-btn block @click.prevent="getPage"> Search </v-btn>
-        <v-progress-circular
-          v-if="isLoading"
-          :indeterminate="isLoading"
-          size="24"
-          class="ms-2"
-        ></v-progress-circular>
+        <v-btn block @click.prevent="getPage" class="py-6"> Search </v-btn>
       </div>
     </div>
     <v-main>
-      <div v-if="data" class="d-flex justify-space-around mb-5">
+      <v-overlay v-model="isLoading" class="align-center justify-center">
+        <v-progress-circular
+          v-if="isLoading"
+          :indeterminate="isLoading"
+          size="64"
+          color="secondary"
+          class="mx-auto"
+        ></v-progress-circular
+      ></v-overlay>
+      <div v-if="data" class="d-flex justify-space-around mb-3">
         <v-pagination
           v-model="form.page"
-          :length="6"
+          :length="10"
+          :total-visible="5"
           rounded="circle"
         ></v-pagination>
       </div>
@@ -91,16 +95,14 @@ watch(() => form.value.page, getPage);
   position: absolute;
 }
 .header {
-  padding: 10px;
   margin: 0 auto;
   width: 100%;
   background: rgb(117, 215, 228);
-  margin-bottom: 20px;
 }
 .header__title {
   font-weight: bold;
   text-align: center;
-  margin-bottom: 20px;
+  font-family: "Lobster", sans-serif;
 }
 
 .form {
@@ -113,60 +115,6 @@ watch(() => form.value.page, getPage);
   max-width: 500px;
 }
 
-.form__search {
-  margin-bottom: 10px;
-  width: 100%;
-}
-
-.form__option {
-  width: 100%;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-.form__options {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  gap: 10px;
-  margin-bottom: 30px;
-  background: rgb(173, 170, 170);
-}
-.form__options div {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-}
-
-.form__label {
-  padding: 0 0 5px 7px;
-  display: inline-block;
-}
-
-.main__btns {
-  display: flex;
-  justify-content: space-around;
-}
-.btn {
-  background: rgb(102, 109, 102);
-  color: rgb(255, 255, 255);
-  width: 30%;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-@media screen and (max-width: 600px) {
-  .form__options {
-    flex-direction: column;
-  }
-
-  .form__options div {
-    width: 100%;
-  }
-}
 .main {
   margin: 0 auto;
   width: 1024px;
