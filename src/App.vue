@@ -47,16 +47,16 @@ function prevPage() {
     <div class="header">
       <h1 class="header__title">Online Movie Search</h1>
       <div class="form">
-        <div class="form__search">
-          <v-text-field
-            variant="solo-filled"
-            v-model="form.search"
-            label="Search"
-            id="form__title"
-          ></v-text-field>
-        </div>
-        <div class="d-flex w-100">
-          <div class="w-50">
+        <v-text-field
+          variant="solo-filled"
+          v-model="form.search"
+          label="Search"
+          class="w-100"
+          id="form__title"
+        ></v-text-field>
+
+        <div class="d-flex justify-space-between w-100">
+          <div class="w-50 mr-5">
             <v-text-field
               variant="solo-filled"
               v-model="form.year"
@@ -73,7 +73,7 @@ function prevPage() {
             ></v-select>
           </div>
         </div>
-        <v-btn @click.prevent="getPage"> Search </v-btn>
+        <v-btn block @click.prevent="getPage"> Search </v-btn>
       </div>
     </div>
     <v-main>
@@ -87,8 +87,10 @@ function prevPage() {
         ></v-progress-circular>
         <v-btn @click="nextPage">Next</v-btn>
       </div>
-      <CardList :data="data" /> </v-main
-  ></v-app>
+
+      <CardList :data="data" />
+    </v-main>
+  </v-app>
 </template>
 
 <style scoped>

@@ -5,13 +5,15 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="cards__list">
-    <div v-for="card in data">
-      <v-sheet :title="card.Title" class="card">
-        <img :src="card.Poster" class="card__img" :alt="card.Title"
-      /></v-sheet>
-    </div>
-  </div>
+  <v-container>
+    <v-row no-gutters>
+      <v-col v-for="card in data" :key="card" cols="12" md="2">
+        <v-card :title="card.Title">
+          <img :src="card.Poster" class="card__img" :alt="card.Title"
+        /></v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <style scoped>
