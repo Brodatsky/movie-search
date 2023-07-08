@@ -42,8 +42,11 @@ watch(() => form.value.page, getPage);
           v-model="form.search"
           label="Search"
           class="w-100"
-          id="form__title"
-        ></v-text-field>
+        >
+          <v-tooltip activator="parent" location="start"
+            >Only english letters</v-tooltip
+          ></v-text-field
+        >
 
         <div class="d-flex justify-space-between w-100">
           <div class="w-50 mr-5">
